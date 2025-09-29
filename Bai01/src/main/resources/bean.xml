@@ -1,0 +1,100 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--inject by setter-->
+    <bean id="class1" class="com.example.baitaptuan06.xmlbased.Class_">
+        <property name="classId" value="DHKTPM18ATT"/>
+        <property name="className" value="Dai hoc KTPM18ATT"/>
+    </bean>
+
+    <bean id="student1" class="com.example.baitaptuan06.xmlbased.Student">
+        <property name="id" value="001"/>
+        <property name="name" value="Nguyen Van1"/>
+        <property name="class_" ref="class1"/>
+    </bean>
+
+    <!--    inject by contructor-arg-->
+    <bean id="student2" class="com.example.baitaptuan06.xmlbased.Student">
+        <constructor-arg name="id" value="002"/>
+        <constructor-arg name="name" value="Nguyen Van2"/>
+        <constructor-arg name="class_" ref="class1"/>
+    </bean>
+
+    <bean id="address1" class="com.example.baitaptuan06.xmlbased.Address">
+        <property name="street" value="Nguyen Van Bao"></property>
+        <property name="city" value="HCM"></property>
+        <property name="country" value="Viet Nam"></property>
+    </bean>
+
+    <bean id="address2" class="com.example.baitaptuan06.xmlbased.Address">
+        <property name="street" value="Nguyen Van Bao"></property>
+        <property name="city" value="HCM"></property>
+        <property name="country" value="Viet Nam"></property>
+    </bean>
+    <!--    XML-Based Configuration – Collection Injection-->
+    <bean id="person" class="com.example.baitaptuan06.xmlbased.Person">
+        <property name="name" value="Le Ngoc Dung"></property>
+        <property name="address">
+            <list>
+                <ref bean="address1"></ref>
+                <ref bean="address2"></ref>
+            </list>
+        </property>
+        <property name="emails">
+            <list>
+                <value>a1@gmail.com</value>
+                <value>a2@gmail.com</value>
+            </list>
+        </property>
+    </bean>
+
+    <!--    Spring’s Auto-wiring (cont.)  Can be omitted-->
+
+    <bean id="faculty" class="com.example.baitaptuan06.autowiring.Faculty">
+        <property name="id" value="FI"></property>
+        <property name="name" value="Faculty of Information Technology"></property>
+
+    </bean>
+    <bean id="dept1" class="com.example.baitaptuan06.autowiring.Department" autowire="no">
+
+        <property name="id" value="DP1"></property>
+        <property name="name" value="department 1"></property>
+        <property name="faculty" ref="faculty">
+
+        </property>
+    </bean>
+
+    <!--    Find bean with the id = “faculty”-->
+
+    <bean id="dept2" class="com.example.baitaptuan06.autowiring.Department" autowire="byName">
+
+        <property name="id" value="DP2"></property>
+        <property name="name" value="department 2"></property>
+        <property name="faculty" ref="faculty">
+
+        </property>
+    </bean>
+
+    <bean id="dept3" class="com.example.baitaptuan06.autowiring.Department" autowire="byType">
+
+        <property name="id" value="DP3"></property>
+        <property name="name" value="department 3"></property>
+        <property name="faculty" ref="faculty">
+
+        </property>
+    </bean>
+<!-- by contructor-->
+    <bean id="dept4" class="com.example.baitaptuan06.autowiring.Department" autowire="constructor">
+
+        <property name="id" value="DP4"></property>
+        <property name="name" value="department 4"></property>
+        <property name="faculty" ref="faculty">
+
+        </property>
+    </bean>
+
+
+
+
+</beans>
